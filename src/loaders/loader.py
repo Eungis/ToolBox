@@ -3,6 +3,7 @@ import os
 
 class QueryLoader:
     """QueryLoader to get queries saved in the "query" directory
+    Directory "query" must be located at the parent root
 
     Args:
         None
@@ -11,10 +12,13 @@ class QueryLoader:
         dictionary: python dictionary with key corresponds to the file name before .sql, and values query text.
     """
     def __init__(self):
-        file = sys.modules[__class__.__module__].__file__
-        path = os.path.abspath(file)
-        # root dir + "/query"
-        directory = os.path.dirname(path) + "/query"
+        # file = sys.modules[__class__.__module__].__file__
+        # path = os.path.abspath(file)
+        # # root dir + "/query"
+        # directory = os.path.dirname(path) + "/query"
+        
+        path = os.path.abspath(os.getcwd())
+        directory = path + "/" + "query"
         self.fetch = None
         
         try:
@@ -43,9 +47,8 @@ class QueryLoader:
             print(e)
             return False
         
-
-            
-                
-        
+if __name__ == "__main__":
+    loader = QueryLoader()
+    print(loader.fetch["item"])
 
         
